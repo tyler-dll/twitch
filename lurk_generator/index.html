@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>!lurk generator (StreamElements + Nightbot)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <h1>!lurk command generator</h1>
+    <p class="sub">1 to 6 messages. 60 chars max each. Switch platform, then Copy Command.</p>
+
+    <section class="card">
+      <div class="topbar">
+        <div class="switches">
+          <label class="lab">
+            Platform
+            <select id="platformSel">
+              <option value="se">StreamElements</option>
+              <option value="nb">Nightbot</option>
+            </select>
+          </label>
+
+          <label class="lab">
+            Mode
+            <select id="modeSel">
+              <option value="add">Add</option>
+              <option value="edit">Edit</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="rightside">
+          <div class="count" id="countText">0 of 6</div>
+          <div class="actions">
+            <button id="addBtn" type="button">Add option</button>
+            <button id="resetBtn" type="button" class="ghost">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <details class="vars">
+        <summary>Variables help</summary>
+        <div id="varsBox" class="varsBox"></div>
+      </details>
+
+      <div id="rows" class="rows"></div>
+
+      <div class="status">
+        <div id="errorText" class="error" aria-live="polite"></div>
+      </div>
+
+      <div class="output">
+        <label for="out">Command</label>
+        <textarea id="out" rows="3" readonly></textarea>
+        <div class="actions">
+          <button id="copyBtn" type="button">Copy Command</button>
+        </div>
+      </div>
+
+      <div class="hint">
+        Platform switch auto swaps common vars when possible. If something can not be swapped, you will get a Yes or No prompt.
+      </div>
+    </section>
+  </main>
+
+  <template id="rowTpl">
+    <div class="row">
+      <input class="msg" type="text" maxlength="60" autocomplete="off" spellcheck="false">
+      <div class="meta">
+        <span class="chars">0/60</span>
+        <button class="del" type="button" title="Delete">Delete</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

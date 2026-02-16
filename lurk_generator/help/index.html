@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nightbot and StreamElements help</title>
+  <link rel="stylesheet" href="help.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="head">
+      <div class="titleRow">
+        <h1>Nightbot and StreamElements help</h1>
+        <div id="platformBadge" class="badge badgeSe" aria-live="polite">StreamElements</div>
+      </div>
+      <p class="sub">
+        Search filters the list. Swap map shows what converts clean.
+      </p>
+    </header>
+
+    <section class="card">
+      <div class="tabs" role="tablist" aria-label="platform tabs">
+        <button class="tabBtn" data-tab="se" id="tabSe" type="button" role="tab" aria-selected="true" aria-controls="panelSe">
+          StreamElements
+        </button>
+        <button class="tabBtn" data-tab="nb" id="tabNb" type="button" role="tab" aria-selected="false" aria-controls="panelNb">
+          Nightbot
+        </button>
+        <button class="tabBtn" data-tab="map" id="tabMap" type="button" role="tab" aria-selected="false" aria-controls="panelMap">
+          Swap map
+        </button>
+      </div>
+
+      <div class="searchRow">
+        <input id="search" class="search" type="text" maxlength="60" autocomplete="off" spellcheck="false"
+               placeholder="search vars, like sender, user, query, title, random">
+        <button id="clearBtn" class="btn ghost" type="button">Clear</button>
+      </div>
+
+      <section id="panelSe" role="tabpanel" aria-labelledby="tabSe">
+        <div class="grid" id="seList"></div>
+      </section>
+
+      <section id="panelNb" class="hide" role="tabpanel" aria-labelledby="tabNb">
+        <div class="grid" id="nbList"></div>
+      </section>
+
+      <section id="panelMap" class="hide" role="tabpanel" aria-labelledby="tabMap">
+        <div class="note">
+          Same style as the lists, but this tab is only for matching names between platforms.
+        </div>
+        <div class="grid" id="mapList"></div>
+
+        <div class="note" style="margin-top:10px">
+          Tip: if people type extra words after the command like "!lurk going to get food", do not use $(touser) in your message.
+          Use $(sender) on StreamElements or $(user) on Nightbot.
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="help.js"></script>
+</body>
+</html>

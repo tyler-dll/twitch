@@ -3,6 +3,34 @@
   var MIN = 1
   var MAXLEN = 60
 
+  var PRESETS = [
+    "@$(user/sender) is lurking, my controller needs a pep talk",
+    "@$(user/sender) activated lurk mode, I am here in spirit",
+    "@$(user/sender) is lurking, my fridge called and I answered",
+    "@$(user/sender) went lurk, brb negotiating with the microwave",
+    "@$(user/sender) went lurk, side quest time",
+    "@$(user/sender) is lurking, gonna go touch grass, maybe",
+    "@$(user/sender) is lurking, I have to do one adult thing, tragic",
+    "@$(user/sender) went lurk, doing cardio, walking to other room",
+    "@$(user/sender) activated stealth mode, if spotted it was lag",
+    "@$(user/sender) is lurking, brb finding where I left my brain",
+    "@$(user/sender) is lurking, if you need me, yell into the void",
+    "@$(user/sender) activated ninja lurk, you saw nothing",
+    "@$(user/sender) is lurking, brb turning 1 min into 12 mins",
+    "@$(user/sender) is lurking, brb going to pretend I am productive",
+    "@$(user/sender) is going to deal with real life for a sec",
+    "@$(user/sender) is lurking for a bit, still watching, probably",
+    "@$(user/sender) is lurking, don't forget me",
+    "@$(user/sender) went lurk, brb",
+    "@$(user/sender) is lurking for a bit, still watching",
+    "@$(user/sender) stepped away, will be back soon",
+    "@$(user/sender) is in the background, still here",
+    "@$(user/sender) is still around, just not typing",
+    "@$(user/sender) is lurking, still vibing",
+    "@$(user/sender) is lurking, back in a few"
+  ]
+
+
   var rowsEl = document.getElementById("rows")
   var tpl = document.getElementById("rowTpl")
   var addBtn = document.getElementById("addBtn")
@@ -19,6 +47,50 @@
 
   var lastPlatform = "se"
   var suppressChange = false
+
+  function userVar() {
+    return platformSel.value === "nb" ? "@$(user)" : "@$(sender)"
+  }
+
+  function applyUserVar(s) {
+    return String(s || "").split("@$(user/sender)").join(userVar())
+  }
+
+  function pickPreset() {
+    if (!PRESETS || !PRESETS.length) return userVar() + " is lurking"
+    var i = Math.floor(Math.random() * PRESETS.length)
+    return applyUserVar(PRESETS[i])
+  }
+
+  function pickPresetBatch(n) {
+    n = n || 1
+    var out = []
+    if (!PRESETS || !PRESETS.length) {
+      out.push(userVar() + " is lurking")
+      while (out.length < n) out.push(out[0])
+      return out
+    }
+
+    var idxs = []
+    for (var i = 0; i < PRESETS.length; i++) idxs.push(i)
+
+    for (var j = idxs.length - 1; j > 0; j--) {
+      var k = Math.floor(Math.random() * (j + 1))
+      var tmp = idxs[j]
+      idxs[j] = idxs[k]
+      idxs[k] = tmp
+    }
+
+    for (var t = 0; t < n; t++) {
+      out.push(applyUserVar(PRESETS[idxs[t % idxs.length]]))
+    }
+    return out
+  }
+
+  function setRandomIntoInput(input) {
+    if (!input) return
+    input.value = normalizeText(pickPreset()).slice(0, MAXLEN)
+  }
 
   var MAP = {
     se_to_nb: [
@@ -65,7 +137,7 @@
   }
 
   function getInputs() {
-    return Array.prototype.slice.call(rowsEl.querySelectorAll(".msg"))
+    return Array.prototype.slice.call(rowsEl.querySelectorAll(".rowMsg"))
   }
 
   function getMessages() {
@@ -89,8 +161,8 @@
     countText.textContent = rows.length + " of " + MAX
 
     for (var i = 0; i < rows.length; i++) {
-      var input = rows[i].querySelector(".msg")
-      var chars = rows[i].querySelector(".chars")
+      var input = rows[i].querySelector(".rowMsg")
+      var chars = rows[i].querySelector(".rowChars")
       var v = normalizeText(input.value)
       if (v !== input.value) input.value = v
       chars.textContent = input.value.length + "/" + MAXLEN
@@ -194,14 +266,23 @@
     if (rows.length >= MAX) return
 
     var node = tpl.content.firstElementChild.cloneNode(true)
-    var input = node.querySelector(".msg")
-    var del = node.querySelector(".del")
+    var input = node.querySelector(".rowMsg")
+    var del = node.querySelector(".rowDel")
+    var rand = node.querySelector(".rowRand")
 
     input.value = normalizeText(value || "")
     input.addEventListener("input", function () {
       updateCounts()
       updateOutput()
     })
+
+    if (rand) {
+      rand.addEventListener("click", function () {
+        setRandomIntoInput(input)
+        updateCounts()
+        updateOutput()
+      })
+    }
 
     del.addEventListener("click", function () {
       node.remove()
@@ -215,18 +296,12 @@
     updateCounts()
     updateOutput()
   }
-
   function resetAll() {
     rowsEl.innerHTML = ""
-    if (platformSel.value === "nb") {
-      addRow("@$(user) is now lurking, snack quest in progress")
-      addRow("@$(user) went full lurk mode, stealth engaged")
-      addRow("@$(user) is lurking, cozy vibes only")
-    } else {
-      addRow("@$(sender) is now lurking, snack quest in progress")
-      addRow("@$(sender) went full lurk mode, stealth engaged")
-      addRow("@$(sender) is lurking, cozy vibes only")
-    }
+    var picks = pickPresetBatch(3)
+    addRow(picks[0])
+    addRow(picks[1])
+    addRow(picks[2])
     setError("")
   }
 

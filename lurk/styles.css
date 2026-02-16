@@ -185,7 +185,7 @@ button:disabled {
   align-items: center;
 }
 
-.msg {
+.rowMsg {
   width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
@@ -195,25 +195,33 @@ button:disabled {
   outline: none;
 }
 
-.msg:focus {
+.rowMsg:focus {
   border-color: rgba(123, 120, 255, 0.65);
   box-shadow: 0 0 0 3px rgba(123, 120, 255, 0.12);
 }
 
-.meta {
+.rowMeta {
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-.chars {
+.rowChars {
   width: 52px;
   text-align: right;
   color: var(--muted);
   font-size: 12px;
 }
 
-.del {
+.rowRand {
+  background: var(--btn);
+}
+
+.rowMsg:not(:placeholder-shown) + .rowMeta .rowRand {
+  display: none;
+}
+
+.rowDel {
   background: var(--btn2);
 }
 

@@ -14,44 +14,8 @@
   var platformSel = document.getElementById("platformSel")
   var modeSel = document.getElementById("modeSel")
   var varsBox = document.getElementById("varsBox")
-
-  var HELP = {
-    se: [
-      '<span class="tag">Auto swap</span><br>',
-      '<code>$(sender)</code> to <code>$(user)</code> (Nightbot)<br>',
-      '<code>$(args)</code> to <code>$(query)</code> (Nightbot)<br>',
-      '<code>$(title)</code> to <code>$(twitch $(channel) "{{title}}}")</code><br>',
-      '<code>$(game)</code> to <code>$(twitch $(channel) "{{game}}}")</code><br>',
-      '<code>$(uptime)</code> to <code>$(twitch $(channel) "{{uptimeLength}}}")</code><br><br>',
-      '<span class="tag">Common</span><br>',
-      '<code>$(touser)</code> first word after command, or sender if none<br>',
-      '<code>$(channel)</code> channel name and stats<br>',
-      '<code>$(time)</code> time output<br>',
-      '<code>$(weather location)</code> weather lookup<br><br>',
-      '<span class="tag">StreamElements extras</span><br>',
-      '<code>$(random.pick ...)</code> pick one item<br>',
-      '<code>$(random 1-100)</code> random number<br>',
-      '<code>$(math 2+2)</code> math<br>',
-      '<code>$(repeat n text)</code> repeat text<br>'
-    ].join(""),
-    nb: [
-      '<span class="tag">Auto swap</span><br>',
-      '<code>$(user)</code> to <code>$(sender)</code> (StreamElements)<br>',
-      '<code>$(query)</code> to <code>$(args)</code> (StreamElements)<br>',
-      '<code>$(twitch $(channel) "{{title}}}")</code> to <code>$(title)</code><br>',
-      '<code>$(twitch $(channel) "{{game}}}")</code> to <code>$(game)</code><br>',
-      '<code>$(twitch $(channel) "{{uptimeLength}}}")</code> to <code>$(uptime)</code><br><br>',
-      '<span class="tag">Common</span><br>',
-      '<code>$(touser)</code> first word after command, or sender if none<br>',
-      '<code>$(channel)</code> channel name<br>',
-      '<code>$(time)</code> time output<br>',
-      '<code>$(weather location)</code> weather lookup<br><br>',
-      '<span class="tag">Nightbot extras</span><br>',
-      '<code>$(eval ...)</code> run JavaScript<br>',
-      '<code>$(twitch username "template")</code> Twitch info<br>',
-      '<code>$(urlfetch url)</code> fetch a url<br>'
-    ].join("")
-  }
+  var varsTplSe = document.getElementById("varsTplSe")
+  var varsTplNb = document.getElementById("varsTplNb")
 
   var lastPlatform = "se"
   var suppressChange = false
@@ -189,7 +153,9 @@
   }
 
   function updateVarsHelp() {
-    varsBox.innerHTML = HELP[platformSel.value] || ""
+    varsBox.innerHTML = ""
+    var t = platformSel.value === "nb" ? varsTplNb : varsTplSe
+    if (t && t.content) varsBox.appendChild(t.content.cloneNode(true))
   }
 
   function updateOutput() {

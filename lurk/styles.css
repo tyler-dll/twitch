@@ -1,22 +1,33 @@
 :root {
   --bg: #0f1220;
-  --card: #171a2b;
+  --bgc1: rgba(123, 120, 255, 0.25);
+  --bgc2: rgba(120, 255, 194, 0.10);
+
   --text: #e9ecff;
   --muted: #b8bde6;
-  --line: rgba(255,255,255,0.12);
+  --line: rgba(255, 255, 255, 0.12);
   --btn: #2a2f52;
   --btn2: #1f2340;
   --bad: #ff7b7b;
   --good: #7bffb0;
+  --card: #171a2b;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body { min-height: 100%; }
+html,
+body {
+  min-height: 100%;
+}
 
 html {
   min-height: 100vh;
-  background: radial-gradient(900px 500px at 20% 0%, rgba(123,120,255,0.25), transparent), radial-gradient(900px 500px at 80% 20%, rgba(120,255,194,0.12), transparent), var(--bg);
+  background:
+    radial-gradient(900px 500px at 20% 0%, var(--bgc1), transparent),
+    radial-gradient(900px 500px at 80% 20%, var(--bgc2), transparent),
+    var(--bg);
 }
 
 body {
@@ -44,7 +55,7 @@ h1 {
 }
 
 .card {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 14px;
@@ -75,7 +86,7 @@ h1 {
 
 select {
   border: 1px solid var(--line);
-  background: rgba(0,0,0,0.25);
+  background: rgba(0, 0, 0, 0.25);
   color: var(--text);
   border-radius: 10px;
   padding: 9px 10px;
@@ -124,7 +135,7 @@ button:disabled {
   margin: 12px 0 6px 0;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: rgba(0,0,0,0.18);
+  background: rgba(0, 0, 0, 0.18);
   padding: 10px 12px;
 }
 
@@ -143,7 +154,7 @@ button:disabled {
 
 .varsBox code {
   color: var(--text);
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--line);
   padding: 1px 6px;
   border-radius: 8px;
@@ -155,7 +166,7 @@ button:disabled {
   padding: 2px 8px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0, 0, 0, 0.15);
   color: var(--text);
   font-weight: 800;
   font-size: 12px;
@@ -179,14 +190,14 @@ button:disabled {
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(0,0,0,0.25);
+  background: rgba(0, 0, 0, 0.25);
   color: var(--text);
   outline: none;
 }
 
 .msg:focus {
-  border-color: rgba(123,120,255,0.65);
-  box-shadow: 0 0 0 3px rgba(123,120,255,0.12);
+  border-color: rgba(123, 120, 255, 0.65);
+  box-shadow: 0 0 0 3px rgba(123, 120, 255, 0.12);
 }
 
 .meta {
@@ -235,7 +246,7 @@ textarea {
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(0,0,0,0.25);
+  background: rgba(0, 0, 0, 0.25);
   color: var(--text);
   resize: vertical;
 }
@@ -259,12 +270,12 @@ textarea {
   color: var(--muted);
   text-decoration: none;
   border: 1px solid var(--line);
-  background: rgba(0,0,0,0.18);
+  background: rgba(0, 0, 0, 0.18);
   padding: 6px 10px;
   border-radius: 999px;
 }
 
 .nav a:hover {
-  border-color: rgba(255,255,255,0.22);
+  border-color: rgba(255, 255, 255, 0.22);
   color: var(--text);
 }

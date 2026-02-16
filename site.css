@@ -1,34 +1,33 @@
-
 :root {
   --bg: #0f1220;
+  --bgc1: rgba(123, 120, 255, 0.25);
+  --bgc2: rgba(120, 255, 194, 0.10);
+
   --text: #e9ecff;
   --muted: #b8bde6;
-  --line: rgba(255,255,255,0.12);
-  --card: rgba(255,255,255,0.04);
-  --liveGlow: rgba(120,255,194,0.34);
-  --soonGlow: rgba(123,120,255,0.26);
-  --liveFill: rgba(120,255,194,0.10);
-  --soonFill: rgba(123,120,255,0.10);
+  --line: rgba(255, 255, 255, 0.12);
+  --card: rgba(255, 255, 255, 0.04);
+
+  --liveGlow: rgba(120, 255, 194, 0.34);
+  --soonGlow: rgba(123, 120, 255, 0.26);
+  --liveFill: rgba(120, 255, 194, 0.10);
+  --soonFill: rgba(123, 120, 255, 0.10);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   min-height: 100%;
 }
 
 html {
   min-height: 100vh;
-}
-
-body {
-  min-height: 100vh;
-}
-
-html {
   background:
-    radial-gradient(900px 500px at 20% 0%, rgba(123,120,255,0.22), transparent),
-    radial-gradient(900px 500px at 80% 20%, rgba(120,255,194,0.14), transparent),
+    radial-gradient(900px 500px at 20% 0%, var(--bgc1), transparent),
+    radial-gradient(900px 500px at 80% 20%, var(--bgc2), transparent),
     var(--bg);
 }
 
@@ -82,7 +81,7 @@ h1 {
 }
 
 .card:hover {
-  border-color: rgba(255,255,255,0.22);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .cardTop {
@@ -103,7 +102,7 @@ h1 {
 }
 
 .meta {
-  color: rgba(184,189,230,0.85);
+  color: rgba(184, 189, 230, 0.85);
   font-size: 13px;
   line-height: 1.45;
 }
